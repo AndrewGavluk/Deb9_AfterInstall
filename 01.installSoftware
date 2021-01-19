@@ -13,7 +13,7 @@ cd ..
 
 # gcc
 cd /opt
-wget git://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-10.2.0/gcc-10.2.0.tar.gz
+wget https://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-10.2.0/gcc-10.2.0.tar.gz
 tar zxf gcc-10.2.0.tar.gz
 cd gcc-10.2.0
 ./contrib/download_prerequisites
