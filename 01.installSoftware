@@ -22,7 +22,7 @@ apt -y install build-essential
 make -j 4
 make install
 
-#boost
+# boost
 cd /opt
 wget https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz
 tar zfx boost_1_75_0.tar.gz
@@ -31,13 +31,17 @@ cd boost_1_75_0
 ./b2 stage -j4 threading=multi link=shared toolset=gcc
 ./b2 install stage -j4 threading=multi link=shared --prefix=/usr
 
-#qt
+# qt
 apt-get install build-essential
 apt-get install qtcreator
+apt-get install aptitude
+echo "!!! DO NOT REMOVE !!!  nvidia-driver*"
 apt-get install qt5-default
+# https://stackoverflow.com/questions/43976570/how-use-qt-in-visual-studio-code
 
-#java?
-#https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6#gistcomment-3019424
+
+# java?
+# https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6#gistcomment-3019424
 apt-get install default-jre
 apt-get install default-jdk
 wget https://download.oracle.com/otn-pub/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_linux-aarch64_bin.tar.gz
