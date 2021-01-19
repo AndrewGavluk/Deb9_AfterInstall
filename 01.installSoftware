@@ -35,7 +35,7 @@ cd boost_1_75_0
 apt-get install build-essential
 apt-get install qtcreator
 apt-get install aptitude
-echo "!!! DO NOT REMOVE !!!  nvidia-driver*"
+echo "! ! ! DO NOT REMOVE ! ! !  nvidia-driver*"
 apt-get install qt5-default
 # https://stackoverflow.com/questions/43976570/how-use-qt-in-visual-studio-code
 
