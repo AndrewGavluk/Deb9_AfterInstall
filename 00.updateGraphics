@@ -1,0 +1,21 @@
+#!/bin/bash
+lspci -nn| egrep -i "3d|display|vga"
+read -p "add contrib non-free in souces, then press y to continue" -n 1 -r
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+	exit 1
+fi
+apt-get update && apt-get install nvidia-detect
+read -p "remove contrib non-free in sources, then press y to continue" -n 1 -r
+echo    # (optional) move to a new line
+if [[ ! $REPLY =~ ^[Yy]$ ]]
+then
+	    exit 1
+fi
+nvidia-detect
+echo "# stretch-backports" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian stretch-backports main contrib non-free" >> /etc/apt/sources.list
+apt-get update && apt install -t stretch-backports linux-image-amd64
+apt install linux-headers-amd64
+apt install -t stretch-backports linux-headers-amd64
+apt install -t stretch-backports nvidia-driver firmware-misc-nonfree
