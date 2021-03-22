@@ -22,6 +22,23 @@ apt -y install build-essential
 make -j 4
 make install
 
+# gtest
+apt-get install libgtest-dev -y
+cd /usr/src/gtest
+env "PATH=$PATH" cmake CMakeLists.txt
+make
+cp *.a /usr/lib
+echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
+apt-get update -qq
+
+# fix GLIBCXX_3.4.26i
+# https://www.programmersought.com/article/94854139306/
+cp /opt/gcc-10.2.0/stage1-x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6.0.28 /usr/lib/x86_64-linux-gnu/
+cd /usr/lib/x86_64-linux-gnu/
+rm -rf libstdc++.so.6
+ln -s libstdc++.so.6.0.28 libstdc++.so.6
+
+
 # boost
 cd /opt
 wget https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.gz
@@ -39,9 +56,22 @@ echo "!!! DO NOT REMOVE !!!  nvidia-driver*"
 apt-get install qt5-default
 # https://stackoverflow.com/questions/43976570/how-use-qt-in-visual-studio-code
 
+# OpenGL
+apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
 
-# java?
-# https://gist.github.com/wavezhang/ba8425f24a968ec9b2a8619d7c2d86a6#gistcomment-3019424
+# java 11
 apt-get install default-jre
 apt-get install default-jdk
-wget https://download.oracle.com/otn-pub/java/jdk/15.0.1%2B9/51f4f36ad4ef43e39d0dfdbaf6549e32/jdk-15.0.1_linux-aarch64_bin.tar.gz
+echo 'deb http://ftp.debian.org/debian stretch-backports main' | sudo tee /etc/apt/sources.list.d/stretch-backports.list
+apt update
+apt install openjdk-11-jdk
+
+
+# openvpn
+cd /home/andrew/Downloads
+apt install apt-transport-https
+wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
+apt-key add openvpn-repo-pkg-key.pub
+wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-stretch.list
+apt install openvpn3
+
